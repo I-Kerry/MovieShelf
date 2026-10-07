@@ -14,6 +14,7 @@ private enum Constants {
 struct HStackMoviesView: View {
     let title: String
     let movies: [MoviePreviewModel]
+    let action: () -> Void
     
     var body: some View {
         VStack(spacing: Constraints.smallerSpacing) {
@@ -24,6 +25,7 @@ struct HStackMoviesView: View {
                     .foregroundStyle(.textMade)
                 Spacer()
                 SeeAllButton {
+                    action()
                 }
             }
             .padding(.horizontal)
@@ -31,7 +33,10 @@ struct HStackMoviesView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: Constraints.smallestSpacing) {
                     ForEach(movies) { movie in
-                        MoviePreviewCell(model: movie)
+                        NavigationLink(value: movie.movieId) {
+                            MoviePreviewCell(model: movie)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.horizontal)

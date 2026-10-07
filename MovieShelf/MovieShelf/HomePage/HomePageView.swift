@@ -10,16 +10,14 @@ import SwiftUI
 struct HomePageView: View {
     @State var viewModel: HomePageViewModel
     var body: some View {
-                
         title
         mainPageView
             .padding()
         
         mainContent
-        
-        .task {
-            await viewModel.loadAll()
-        }
+            .task {
+                await viewModel.loadAll()
+            }
     }
     
     @ViewBuilder
@@ -42,7 +40,7 @@ struct HomePageView: View {
                 case .idle, .loading:
                     ProgressView()
                 case .loaded(let movies):
-                    HStackMoviesView(title: Titles.popularMovies, movies: movies)
+                    HStackMoviesView(title: Titles.popularMovies, movies: movies, action: { })
                 case .error(let message):
                     Text(message)
                 }
@@ -51,7 +49,7 @@ struct HomePageView: View {
                 case .idle, .loading:
                     ProgressView()
                 case .loaded(let movies):
-                    HStackMoviesView(title: Titles.nowPlaying, movies: movies)
+                    HStackMoviesView(title: Titles.nowPlaying, movies: movies, action: { })
                 case .error(let message):
                     Text(message)
                 }
@@ -60,7 +58,7 @@ struct HomePageView: View {
                 case .idle, .loading:
                     ProgressView()
                 case .loaded(let movies):
-                    HStackMoviesView(title: Titles.upcoming, movies: movies)
+                    HStackMoviesView(title: Titles.upcoming, movies: movies, action: { })
                 case .error(let message):
                     Text(message)
                 }
@@ -69,14 +67,14 @@ struct HomePageView: View {
                 case .idle, .loading:
                     ProgressView()
                 case .loaded(let movies):
-                    HStackMoviesView(title: Titles.top, movies: movies)
+                    HStackMoviesView(title: Titles.top, movies: movies, action: { })
                 case .error(let message):
                     Text(message)
                 }
             }
         }
         .navigationDestination(for: Int.self) { movieId in
-            MovieDetailView(id: movieId)
+            MovieDetailView(service: viewModel.service, movieId: movieId)
         }
     }
     

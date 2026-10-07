@@ -23,7 +23,7 @@ enum TrendingTimeWindow: String {
 @Observable
 final class HomePageViewModel {
     
-    private let service: TMDBService
+    let service: TMDBService
     var popular: LoadingState<[MoviePreviewModel]> = .idle
     var nowPlaying: LoadingState<[MoviePreviewModel]> = .idle
     var upcoming: LoadingState<[MoviePreviewModel]> = .idle
