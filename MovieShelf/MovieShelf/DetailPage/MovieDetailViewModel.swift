@@ -7,17 +7,10 @@
 
 import Foundation
 
-enum DetailLoadingState<T> {
-    case idle
-    case loading
-    case loaded(T)
-    case error(String)
-}
-
 @Observable
 @MainActor
 final class MovieDetailViewModel {
-    private(set) var state: DetailLoadingState<MovieDetailModel> = .idle
+    private(set) var state: LoadingState<MovieDetailModel> = .idle
     private let service: TMDBService
     
     init(service: TMDBService) {
