@@ -55,9 +55,6 @@ extension MovieDTO {
         let posterURL: URL? = posterPath.flatMap {
             URL(string: "\(TMDBImage.baseURL)\($0)")
         }
-        let backdropURL: URL? = backdropPath.flatMap {
-            URL(string: "\(TMDBImage.baseURL)\($0)")
-        }
         let year: Int? = Int(String(releaseDate.prefix(4)))
         let formattedRating = ((voteAverage * 100).rounded() / 100 )
         let genre = genreIds.first.flatMap { genres[$0]}

@@ -18,7 +18,7 @@ struct ContentView: View {
                 }
             }
             Tab("", systemImage: Icons.magnifyingGlass) {
-//                HomePageView()
+                SearchView(viewModel: SearchViewModel(service: TMDBService()))
             }
             Tab("", systemImage: Icons.wishlist) {
 //                HomePageView()
