@@ -14,4 +14,6 @@ struct MovieDetailModel: Hashable {
     let overview: String
     let posterURL: URL?
     let backdropURL: URL?
+    let genres: [String]
+    let duration: Int?
 }

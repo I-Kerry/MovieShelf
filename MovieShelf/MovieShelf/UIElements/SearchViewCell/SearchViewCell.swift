@@ -24,7 +24,7 @@ struct SearchViewCell: View {
             }
             .frame(width: 70, height: 105)
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: Constraints.spacing) {
                 Text(searchModel.title)
                     .font(.headline)
                 HStack {
@@ -38,9 +38,13 @@ struct SearchViewCell: View {
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 }
-                Text(String(format: "%.1f", searchModel.rating))
-                    .font(.title3)
-                    .foregroundStyle(.yellow)
+                if let rating = searchModel.rating {
+                    Text(String(format: "%.1f", rating))
+                        .font(.title3)
+                        .foregroundStyle(.yellow)
+                } else {
+                    Text("Not rated yet")
+                }
             }
             .padding()
             
@@ -49,6 +53,8 @@ struct SearchViewCell: View {
         .frame(height: 104)
         .frame(maxWidth: .infinity)
         .padding()
+        .background(Color.backgroundMade)
+        .clipShape(RoundedRectangle(cornerRadius: Constraints.cornerRadius))
     }
 }
 

@@ -63,6 +63,26 @@ struct MovieDetailView: View {
                 if let year = movie.releaseDate {
                     Text(String(year))
                 }
+                
+                ScrollView(.horizontal ,showsIndicators: false) {
+                    HStack(spacing: Constraints.smallerSpacing) {
+                        ForEach(movie.genres, id: \.self) { genre in
+                            Text(genre)
+                                .font(.subheadline)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(Capsule().fill(Color.blue.opacity(0.2)))
+                                .foregroundStyle(.blue)
+                        }
+                    }
+                }
+                
+                if let formatterDuration = viewModel.durationFormatter(movie.duration) {
+                    Text(formatterDuration)
+                        .font(.subheadline)
+                        .foregroundStyle(Color.black)
+                }
+                
                 Text(movie.overview)
             }
             .padding()

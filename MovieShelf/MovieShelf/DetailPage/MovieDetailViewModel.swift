@@ -27,4 +27,9 @@ final class MovieDetailViewModel {
             state = .error("Can't be uploaded")
         }
     }
+    
+    func durationFormatter(_ mins: Int?) -> String? {
+        guard let mins, mins > 0 else { return nil }
+        return "\(mins / 60)h \(mins % 60)m"
+    }
 }

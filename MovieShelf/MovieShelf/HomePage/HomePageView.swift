@@ -80,13 +80,18 @@ struct HomePageView: View {
     
     @ViewBuilder
     private var mainPageView: some View {
-        if let trendingMovie = viewModel.trendingMovie {
-            MainPageImageView(
-                imageURL: trendingMovie.posterURL,
-                title: trendingMovie.name,
-                year: trendingMovie.year,
-                genre: trendingMovie.genre, rating: Float(trendingMovie.rating)
-            )
+        VStack {
+            if let trendingMovie = viewModel.trendingMovie {
+                NavigationLink(value: trendingMovie.movieId) {
+                    MainPageImageView(
+                        imageURL: trendingMovie.posterURL,
+                        title: trendingMovie.name,
+                        year: trendingMovie.year,
+                        genre: trendingMovie.genre, rating: Float(trendingMovie.rating)
+                    )
+                }
+                .buttonStyle(.plain)
+            }
         }
     }
 }

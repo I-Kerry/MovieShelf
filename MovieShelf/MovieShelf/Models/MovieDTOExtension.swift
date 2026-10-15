@@ -37,6 +37,7 @@ extension MovieDetailsDTO {
         }
         let year: Int? = Int(String(releaseDate.prefix(4)))
         let formattedRating = ((voteAverage * 100).rounded() / 100 )
+        let genres = genres.map(\.name)
         
         return MovieDetailModel(
             title: title,
@@ -44,20 +45,22 @@ extension MovieDetailsDTO {
             releaseDate: year,
             overview: overview,
             posterURL: posterURL,
-            backdropURL: backdropURL
+            backdropURL: backdropURL,
+            genres: genres,
+            duration: runtime
         )
     }
 }
 
 extension MovieDTO {
     
-    func toSearchModel(genres: [Int:String]) -> SearchModel {
+    func toSearchModel(genres: [Int: String]) -> SearchModel {
         let posterURL: URL? = posterPath.flatMap {
             URL(string: "\(TMDBImage.baseURL)\($0)")
         }
         let year: Int? = Int(String(releaseDate.prefix(4)))
         let formattedRating = ((voteAverage * 100).rounded() / 100 )
-        let genre = genreIds.first.flatMap { genres[$0]}
+        let genre = genreIds.first.flatMap { genres[$0] }
         
         return SearchModel(
             id: id,

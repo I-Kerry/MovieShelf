@@ -28,7 +28,7 @@ final class SearchViewModel {
         do {
             let response: MoviesResponse = try await service.fetch(.searchMovie(query: query))
             
-            state = .loaded(response.results.map { $0.toSearchModel(genres: genres) } )
+            state = .loaded(response.results.map { $0.toSearchModel(genres: genres) })
         } catch {
             state = .error("Can't be uploaded")
         }

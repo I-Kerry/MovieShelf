@@ -13,5 +13,5 @@ struct SearchModel: Identifiable, Hashable {
     let title: String
     let releaseYear: Int?
     let genre: String?
-    let rating: Double
+    let rating: Double?
 }

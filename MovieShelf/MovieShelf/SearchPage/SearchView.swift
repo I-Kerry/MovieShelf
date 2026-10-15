@@ -12,34 +12,46 @@ struct SearchView: View {
     
     var body: some View {
         NavigationStack {
-            TextField("Search movies...", text: $viewModel.text)
-                .task(id: viewModel.text) {
-                    await viewModel.search()
-                }
-                .padding()
-            
-            content
+            VStack {
+                TextField("Search movies...", text: $viewModel.text)
+                    .task(id: viewModel.text) {
+                        await viewModel.search()
+                    }
+                    .foregroundStyle(Color.gray)
+                    .padding()
+                
+                content
+            }
+            .navigationDestination(for: Int.self) { movieID in
+                MovieDetailView(service: viewModel.service, movieId: movieID)
+            }
         }
     }
     
+    @ViewBuilder
     private var content: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading) {
-                switch viewModel.state {
-                case .idle:
-                    ProgressView()
-                case .loading:
-                    Text("Search for the film you'd like to know about")
-                case .loaded(let movies):
+        switch viewModel.state {
+        case .idle:
+            SearchPlaceholder()
+        case .loading:
+            Spacer()
+            ProgressView()
+            Spacer()
+        case .loaded(let movies):
+            ScrollView {
+                LazyVStack(alignment: .center) {
                     ForEach(movies) { movie in
                         NavigationLink(value: movie.id) {
                             SearchViewCell(searchModel: movie)
                         }
+                        .buttonStyle(.plain)
                     }
-                case .error(let message):
-                    Text(message)
                 }
             }
+        case .error(let message):
+            Spacer()
+            Text(message)
+            Spacer()
         }
     }
 }
