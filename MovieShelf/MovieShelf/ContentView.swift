@@ -9,24 +9,25 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    var service: TMDBService
     var body: some View {
         TabView {
             
             Tab("", systemImage: Icons.home) {
                 NavigationStack {
-                    HomePageView(viewModel: HomePageViewModel(service: TMDBService()))
+                    HomePageView(viewModel: HomePageViewModel(service: service))
                 }
             }
             Tab("", systemImage: Icons.magnifyingGlass) {
-                SearchView(viewModel: SearchViewModel(service: TMDBService()))
+                SearchView(viewModel: SearchViewModel(service: service))
             }
             Tab("", systemImage: Icons.wishlist) {
-//                HomePageView()
+//                WatchListView(_likedFilms: likedFilms, service: service)
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(service: TMDBService())
 }

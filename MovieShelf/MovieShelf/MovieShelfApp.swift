@@ -14,6 +14,6 @@ struct MovieShelfApp: App {
         WindowGroup {
             ContentView()
         }
-//        .modelContainer(sharedModelContainer)
+        .modelContainer(for: SDWatchListItem.self)
     }
 }
