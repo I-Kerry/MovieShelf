@@ -14,10 +14,10 @@ final class SDWatchListItem {
     var title: String
     var posterURL: String?
     var voteAverage: Double?
-    var releaseDate: String?
+    var releaseDate: Int?
     var addedAt: Date = Date.now
     
-    init(id: Int, title: String, posterURL: String? = nil, voteAverage: Double? = nil, releaseDate: String? = nil, addedAt: Date) {
+    init(id: Int, title: String, posterURL: String? = nil, voteAverage: Double? = nil, releaseDate: Int? = nil, addedAt: Date) {
         self.id = id
         self.title = title
         self.posterURL = posterURL

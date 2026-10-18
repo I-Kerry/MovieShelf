@@ -12,9 +12,13 @@ import Foundation
 final class MovieDetailViewModel {
     private(set) var state: LoadingState<MovieDetailModel> = .idle
     private let service: TMDBService
+    var repository: WatchlistRepository?
+    private(set) var isSaved: Bool = false
+    private let movieId: Int
     
-    init(service: TMDBService) {
+    init(service: TMDBService, movieId: Int) {
         self.service = service
+        self.movieId = movieId
     }
     
     func loadDetails(movieID: Int) async {
@@ -31,5 +35,19 @@ final class MovieDetailViewModel {
     func durationFormatter(_ mins: Int?) -> String? {
         guard let mins, mins > 0 else { return nil }
         return "\(mins / 60)h \(mins % 60)m"
+    }
+    
+    func loadSavedState() {
+        isSaved = repository?.contains(movieId) ?? false
+    }
+    
+    func toggleWatchlist(movieId: Int) {
+        if isSaved {
+            repository?.remove([movieId])
+        } else {
+            guard case .loaded(let details) = state else { return }
+            repository?.add(id: movieId, title: details.title, posterURL: details.posterURL?.absoluteString, voteAverage: details.rating, releaseDate: details.releaseDate)
+        }
+        isSaved = repository?.contains(movieId) ?? false
     }
 }

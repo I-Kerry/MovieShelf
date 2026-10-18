@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct MovieDetailView: View {
+    @Environment(\.watchlistRepository) private var repository
     @State private var viewModel: MovieDetailViewModel
     let movieId: Int
     
     init(service: TMDBService, movieId: Int) {
-        _viewModel = State(initialValue: MovieDetailViewModel(service: service))
+        _viewModel = State(initialValue: MovieDetailViewModel(service: service, movieId: movieId))
         self.movieId = movieId
     }
-    
+        
     var body: some View {
         Group {
             switch viewModel.state {
@@ -32,6 +33,10 @@ struct MovieDetailView: View {
         }
         .task {
             await viewModel.loadDetails(movieID: movieId)
+        }
+        .task {
+            viewModel.repository = repository
+            viewModel.loadSavedState()
         }
     }
     

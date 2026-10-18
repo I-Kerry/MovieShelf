@@ -57,7 +57,7 @@ struct WatchListCell: View {
                     }
                 }
                 if let releaseDate = item.releaseDate {
-                    Text(releaseDate.prefix(4))
+                    Text(String(releaseDate))
                         .font(.caption)
                 }
             }
@@ -66,5 +66,5 @@ struct WatchListCell: View {
 }
 
 #Preview {
-    WatchListCell(item: SDWatchListItem(id: 1, title: "Lox",voteAverage: 8.1, releaseDate: "2025"  ,addedAt: .now))
+    WatchListCell(item: SDWatchListItem(id: 1, title: "Lox",voteAverage: 8.1, releaseDate: 2025  ,addedAt: .now))
 }
