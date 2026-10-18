@@ -31,9 +31,21 @@ struct MovieDetailView: View {
                 }
             }
         }
+        
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    viewModel.toggleWatchlist(movieId: movieId)
+                } label: {
+                    viewModel.isSaved ? Image(systemName: "plus.rectangle.fill.on.rectangle.fill") : Image(systemName: "plus.rectangle.on.rectangle")
+                }
+            }
+        }
+        
         .task {
             await viewModel.loadDetails(movieID: movieId)
         }
+        
         .task {
             viewModel.repository = repository
             viewModel.loadSavedState()

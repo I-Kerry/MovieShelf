@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct WatchListCell: View {
+    @State private var reloadToken = UUID()
     let item: SDWatchListItem
     var body: some View {
         VStack(alignment: .leading, spacing: Constraints.smallerSpacing) {
             poster
             info
         }
+        .onAppear { reloadToken = UUID() }
     }
     
     @ViewBuilder
@@ -29,9 +31,11 @@ struct WatchListCell: View {
                         image.resizable()
                             .scaledToFill()
                     case .failure: Image(systemName: "photo")
+
                     @unknown default: EmptyView()
                     }
                 }
+                .id(reloadToken)
             } else {
                 Image(systemName: "photo")
             }
@@ -44,20 +48,23 @@ struct WatchListCell: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(item.title)
                 .font(.body)
+                .lineLimit(2, reservesSpace: true)
             
             HStack(spacing: 4) {
                 if let rating = item.voteAverage {
                     Text("★ \(String(format: "%.1f", rating))")
                         .font(.caption)
                         .foregroundStyle(.yellow)
-                    
-                    if item.voteAverage != nil {
-                        Circle()
-                            .frame(width: 5, height: 5)
-                    }
                 }
+                
+                if item.voteAverage != nil,
+                   item.releaseDate != nil {
+                    Circle()
+                        .frame(width: 5, height: 5)
+                }
+                
                 if let releaseDate = item.releaseDate {
-                    Text(String(releaseDate))
+                    Text(String(releaseDate).prefix(4))
                         .font(.caption)
                 }
             }

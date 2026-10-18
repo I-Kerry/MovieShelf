@@ -25,7 +25,7 @@ struct WatchListView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns, alignment: .center, spacing: Constraints.spacing) {
-                    ForEach(likedFilms) { film in
+                    ForEach(likedFilms, id: \.id) { film in
                         NavigationLink(value: film.id) {
                             WatchListCell(item: film)
                         }

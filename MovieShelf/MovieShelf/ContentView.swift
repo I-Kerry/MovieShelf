@@ -22,7 +22,7 @@ struct ContentView: View {
                 SearchView(viewModel: SearchViewModel(service: service))
             }
             Tab("", systemImage: Icons.wishlist) {
-//                WatchListView(_likedFilms: likedFilms, service: service)
+                WatchListView(service: service)
             }
         }
     }
