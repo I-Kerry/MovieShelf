@@ -9,15 +9,19 @@ import SwiftUI
 
 struct HomePageView: View {
     @State var viewModel: HomePageViewModel
+    @State var path = NavigationPath()
+    
     var body: some View {
-        title
-        mainPageView
-            .padding()
-        
-        mainContent
-            .task {
-                await viewModel.loadAll()
-            }
+        NavigationStack(path: $path) {
+            title
+            mainPageView
+                .padding()
+            
+            mainContent
+                .task {
+                    await viewModel.loadAll()
+                }
+        }
     }
     
     @ViewBuilder
@@ -40,7 +44,7 @@ struct HomePageView: View {
                 case .idle, .loading:
                     ProgressView()
                 case .loaded(let movies):
-                    HStackMoviesView(title: Titles.popularMovies, movies: movies, action: { })
+                    HStackMoviesView(title: Titles.popularMovies, movies: movies, action: { path.append(MovieCategory.popular) })
                 case .error(let message):
                     Text(message)
                 }
@@ -49,7 +53,7 @@ struct HomePageView: View {
                 case .idle, .loading:
                     ProgressView()
                 case .loaded(let movies):
-                    HStackMoviesView(title: Titles.nowPlaying, movies: movies, action: { })
+                    HStackMoviesView(title: Titles.nowPlaying, movies: movies, action: { path.append(MovieCategory.nowPlaying) })
                 case .error(let message):
                     Text(message)
                 }
@@ -58,7 +62,7 @@ struct HomePageView: View {
                 case .idle, .loading:
                     ProgressView()
                 case .loaded(let movies):
-                    HStackMoviesView(title: Titles.upcoming, movies: movies, action: { })
+                    HStackMoviesView(title: Titles.upcoming, movies: movies, action: { path.append(MovieCategory.upcoming) })
                 case .error(let message):
                     Text(message)
                 }
@@ -67,7 +71,7 @@ struct HomePageView: View {
                 case .idle, .loading:
                     ProgressView()
                 case .loaded(let movies):
-                    HStackMoviesView(title: Titles.top, movies: movies, action: { })
+                    HStackMoviesView(title: Titles.top, movies: movies, action: { path.append(MovieCategory.topRated) })
                 case .error(let message):
                     Text(message)
                 }
@@ -75,6 +79,9 @@ struct HomePageView: View {
         }
         .navigationDestination(for: Int.self) { movieId in
             MovieDetailView(service: viewModel.service, movieId: movieId)
+        }
+        .navigationDestination(for: MovieCategory.self) { category in
+            SeeAllView(service: viewModel.service, category: category)
         }
     }
     

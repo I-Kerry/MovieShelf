@@ -14,9 +14,7 @@ struct ContentView: View {
         TabView {
             
             Tab("", systemImage: Icons.home) {
-                NavigationStack {
-                    HomePageView(viewModel: HomePageViewModel(service: service))
-                }
+                HomePageView(viewModel: HomePageViewModel(service: service))
             }
             Tab("", systemImage: Icons.magnifyingGlass) {
                 SearchView(viewModel: SearchViewModel(service: service))

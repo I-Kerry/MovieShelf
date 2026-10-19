@@ -12,7 +12,7 @@ struct MovieDetailView: View {
     @State private var viewModel: MovieDetailViewModel
     let movieId: Int
     
-    init(service: TMDBService, movieId: Int) {
+    init(service: APIClientProtocol, movieId: Int) {
         _viewModel = State(initialValue: MovieDetailViewModel(service: service, movieId: movieId))
         self.movieId = movieId
     }

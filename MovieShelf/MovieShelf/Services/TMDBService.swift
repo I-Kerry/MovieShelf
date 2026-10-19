@@ -11,7 +11,7 @@ protocol APIClientProtocol {
     func fetch<T: Decodable>(_ endpoint: TMDBEndpoints) async throws -> T
 }
 
-final class TMDBService {
+final class TMDBService: APIClientProtocol {
     
     func makeRequest(for endpoint: TMDBEndpoints) -> URLRequest? {
         guard let url = endpoint.makeURL() else { return nil }
@@ -57,7 +57,7 @@ final class TMDBService {
 #Preview {
     Color.white
         .task {
-            let request = TMDBService().makeRequest(for: .popular)
+            let request = TMDBService().makeRequest(for: .popular(page: 1))
             print(request?.allHTTPHeaderFields ?? [:])
             print(request?.url?.absoluteString ?? "nil")
         }

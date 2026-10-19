@@ -11,12 +11,12 @@ import Foundation
 @MainActor
 final class MovieDetailViewModel {
     private(set) var state: LoadingState<MovieDetailModel> = .idle
-    private let service: TMDBService
+    private let service: APIClientProtocol
     var repository: WatchlistRepository?
     private(set) var isSaved: Bool = false
     private let movieId: Int
     
-    init(service: TMDBService, movieId: Int) {
+    init(service: APIClientProtocol, movieId: Int) {
         self.service = service
         self.movieId = movieId
     }

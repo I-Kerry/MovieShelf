@@ -8,9 +8,9 @@
 import SwiftUI
 
 enum TMDBEndpoints {
-    case popular
-    case nowPlaying
-    case upcoming
+    case popular(page: Int)
+    case nowPlaying(page: Int)
+    case upcoming(page: Int)
     case trending(timeWindow: TrendingTimeWindow)
     case searchMovie(query: String)
     case movie(id: Int)
@@ -18,7 +18,7 @@ enum TMDBEndpoints {
     case movieVideos(movieId: Int)
     case movieSimilar(movieId: Int)
     case discover
-    case topRated
+    case topRated(page: Int)
     
     var path: String {
         switch self {
@@ -40,9 +40,7 @@ enum TMDBEndpoints {
 extension TMDBEndpoints {
     var queryItems: [URLQueryItem] {
         switch self {
-        case .popular: []
-        case .nowPlaying: []
-        case .upcoming: []
+        case .popular(let page), .nowPlaying(let page), .topRated(let page), .upcoming(let page): [URLQueryItem(name: "page", value: String(page))]
         case .trending: []
         case .searchMovie(let query): [URLQueryItem(name: "query", value: query)]
         case .movie: []
@@ -50,7 +48,6 @@ extension TMDBEndpoints {
         case .movieVideos: []
         case .movieSimilar: []
         case .discover: []
-        case .topRated: []
         }
     }
     
@@ -74,7 +71,7 @@ extension TMDBEndpoints {
                 .movieSimilar(movieId: 14),
                 .trending(timeWindow: .day),
                 .searchMovie(query: "Alahamoha"),
-                .nowPlaying
+                .nowPlaying(page: 1)
             ]
             for endpoint in endpoints {
                 print(endpoint.makeURL()?.absoluteString ?? "nil")

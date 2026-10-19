@@ -10,13 +10,13 @@ import SwiftData
 
 struct WatchListView: View {
     @Query(sort: \SDWatchListItem.addedAt, order: .reverse) private var likedFilms: [SDWatchListItem]
-    private let service: TMDBService
+    private let service: APIClientProtocol
     
-    init(service: TMDBService) {
+    init(service: APIClientProtocol) {
         self.service = service
     }
     
-    let columns = [
+    private let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
     ]

@@ -16,7 +16,7 @@ enum TrendingTimeWindow: String {
 @Observable
 final class HomePageViewModel {
     
-    let service: TMDBService
+    let service: APIClientProtocol
     var popular: LoadingState<[MoviePreviewModel]> = .idle
     var nowPlaying: LoadingState<[MoviePreviewModel]> = .idle
     var upcoming: LoadingState<[MoviePreviewModel]> = .idle
@@ -24,7 +24,7 @@ final class HomePageViewModel {
     var trending: LoadingState<[MoviePreviewModel]> = .idle
     var trendingMovie: MoviePreviewModel?
     
-    init(service: TMDBService) {
+    init(service: APIClientProtocol) {
         self.service = service
     }
     
@@ -39,16 +39,16 @@ final class HomePageViewModel {
     
     func loadAll() async {
         popular = .loading
-        popular = await loadCategories(endpoint: .popular)
+        popular = await loadCategories(endpoint: .popular(page: 1))
         
         nowPlaying = .loading
-        nowPlaying = await loadCategories(endpoint: .nowPlaying)
+        nowPlaying = await loadCategories(endpoint: .nowPlaying(page: 1))
         
         upcoming = .loading
-        upcoming = await loadCategories(endpoint: .upcoming)
+        upcoming = await loadCategories(endpoint: .upcoming(page: 1))
         
         topRated = .loading
-        topRated = await loadCategories(endpoint: .topRated)
+        topRated = await loadCategories(endpoint: .topRated(page: 1))
         
         trending = .loading
         trending = await loadCategories(endpoint: .trending(timeWindow: .day))

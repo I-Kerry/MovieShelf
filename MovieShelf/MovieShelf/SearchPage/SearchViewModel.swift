@@ -11,11 +11,11 @@ import Foundation
 @MainActor
 final class SearchViewModel {
     private(set) var state: LoadingState<[SearchModel]> = .idle
-    let service: TMDBService
+    let service: APIClientProtocol
     private var genres: [Int: String] = [:]
     var text = ""
     
-    init(service: TMDBService) {
+    init(service: APIClientProtocol) {
         self.service = service
     }
     

@@ -51,3 +51,8 @@ struct MoviePreviewCell: View {
         .frame(width: Constants.width)
     }
 }
+
+#Preview {
+    MoviePreviewCell(model: MoviePreviewModel(
+        movieId: 1, posterURL: nil, name: "idk", year: 2009, rating: 1.9, genre: nil))
+}
