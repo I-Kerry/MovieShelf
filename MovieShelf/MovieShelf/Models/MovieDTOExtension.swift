@@ -16,6 +16,7 @@ extension MovieDTO {
         let formattedRating = ((voteAverage) * 100).rounded() / 100
         
         return MoviePreviewModel(
+            id: id,
             movieId: id,
             posterURL: posterURL,
             name: title,

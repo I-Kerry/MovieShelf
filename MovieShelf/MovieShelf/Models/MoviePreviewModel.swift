@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MoviePreviewModel: Identifiable, Hashable {
-    let id = UUID()
+    let id: Int
     let movieId: Int
     let posterURL: URL?
     let name: String

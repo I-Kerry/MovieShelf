@@ -21,41 +21,50 @@ struct SeeAllView: View {
     }
     
     var body: some View {
-        Group {
-            mainContent
-        }
-        .task {
-            await viewModel.loadFirstPage()
-        }
-        .navigationTitle(viewModel.category.title)
+        
+        mainContent
+        
+            .task {
+                await viewModel.loadFirstPage()
+            }
+            .navigationTitle(viewModel.category.title)
+            .navigationDestination(for: Int.self) { movieId in
+                MovieDetailView(service: viewModel.service, movieId: movieId)
+            }
     }
     
     @ViewBuilder
     private var mainContent: some View {
-            switch viewModel.state {
-            case .idle, .loading:
-                ProgressView()
-            case .loaded:
-                ScrollView {
-                    LazyVGrid(columns: columns, alignment: .center, spacing: Constraints.smallerSpacing) {
-                        ForEach(viewModel.movies, id: \.id) { movie in
-                            NavigationLink(value: movie.id) {
-                                MoviePreviewCell(model: movie)
-                            }
-                            .onAppear {
-                                if movie.id == viewModel.movies.last?.id {
-                                    Task { await viewModel.loadNextPage() }
-                                }
+        switch viewModel.state {
+        case .idle, .loading:
+            ProgressView()
+        case .loaded:
+            ScrollView {
+                LazyVGrid(columns: columns, alignment: .center, spacing: Constraints.smallerSpacing) {
+                    ForEach(viewModel.movies, id: \.id) { movie in
+                        NavigationLink(value: movie.id) {
+                            MoviePreviewCell(model: movie)
+                        }
+                        .buttonStyle(.plain)
+                        .onAppear {
+                            if movie.id == viewModel.movies.last?.id {
+                                Task { await viewModel.loadNextPage() }
                             }
                         }
                     }
                 }
-            case .error:
+                if viewModel.isLoadingMore == true {
+                    ProgressView()
+                }
+            }
+        case .error:
+            VStack(alignment: .center) {
                 Text("Can't be uploaded")
                 Button("Try again") {
                     Task { await viewModel.retry() }
                 }
-                
+            }
+            
         }
     }
 }

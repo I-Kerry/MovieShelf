@@ -81,10 +81,6 @@ final class SeeAllViewModel {
         }
     }
     
-    private func fetch(_ page: Int) async throws -> MoviesResponse {
-        try await service.fetch(category.endpoint(page: page))
-    }
-    
     func retry() async {
         state = .idle
         await loadFirstPage()

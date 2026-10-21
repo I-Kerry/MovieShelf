@@ -6,11 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		3567070E3086BECC00399009 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3569CCBC303C966300F9039B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3569CCC3303C966300F9039B;
+			remoteInfo = MovieShelf;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		3567070A3086BECC00399009 /* MovieShelfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieShelfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3569CCC4303C966300F9039B /* MovieShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		3567070B3086BECC00399009 /* MovieShelfTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MovieShelfTests;
+			sourceTree = "<group>";
+		};
 		3569CCC6303C966300F9039B /* MovieShelf */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MovieShelf;
@@ -19,6 +35,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		356707073086BECC00399009 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3569CCC1303C966300F9039B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				3569CCC6303C966300F9039B /* MovieShelf */,
+				3567070B3086BECC00399009 /* MovieShelfTests */,
 				3569CCC5303C966300F9039B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				3569CCC4303C966300F9039B /* MovieShelf.app */,
+				3567070A3086BECC00399009 /* MovieShelfTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +73,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		356707093086BECC00399009 /* MovieShelfTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 356707103086BECC00399009 /* Build configuration list for PBXNativeTarget "MovieShelfTests" */;
+			buildPhases = (
+				356707063086BECC00399009 /* Sources */,
+				356707073086BECC00399009 /* Frameworks */,
+				356707083086BECC00399009 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3567070F3086BECC00399009 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3567070B3086BECC00399009 /* MovieShelfTests */,
+			);
+			name = MovieShelfTests;
+			packageProductDependencies = (
+			);
+			productName = MovieShelfTests;
+			productReference = 3567070A3086BECC00399009 /* MovieShelfTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3569CCC3303C966300F9039B /* MovieShelf */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3569CCD1303C966600F9039B /* Build configuration list for PBXNativeTarget "MovieShelf" */;
@@ -80,6 +128,10 @@
 				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
+					356707093086BECC00399009 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = 3569CCC3303C966300F9039B;
+					};
 					3569CCC3303C966300F9039B = {
 						CreatedOnToolsVersion = 26.3;
 					};
@@ -100,11 +152,19 @@
 			projectRoot = "";
 			targets = (
 				3569CCC3303C966300F9039B /* MovieShelf */,
+				356707093086BECC00399009 /* MovieShelfTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		356707083086BECC00399009 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3569CCC2303C966300F9039B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +175,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		356707063086BECC00399009 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3569CCC0303C966300F9039B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +191,57 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3567070F3086BECC00399009 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3569CCC3303C966300F9039B /* MovieShelf */;
+			targetProxy = 3567070E3086BECC00399009 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		356707113086BECC00399009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5ZJ6K5QGT4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Kerry.app.MovieShelfTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieShelf.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MovieShelf";
+			};
+			name = Debug;
+		};
+		356707123086BECC00399009 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5ZJ6K5QGT4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Kerry.app.MovieShelfTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieShelf.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MovieShelf";
+			};
+			name = Release;
+		};
 		3569CCCF303C966600F9039B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -313,6 +430,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		356707103086BECC00399009 /* Build configuration list for PBXNativeTarget "MovieShelfTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				356707113086BECC00399009 /* Debug */,
+				356707123086BECC00399009 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3569CCBF303C966300F9039B /* Build configuration list for PBXProject "MovieShelf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

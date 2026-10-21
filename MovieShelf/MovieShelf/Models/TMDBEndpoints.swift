@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TMDBEndpoints {
+enum TMDBEndpoints: Hashable, Equatable {
     case popular(page: Int)
     case nowPlaying(page: Int)
     case upcoming(page: Int)
