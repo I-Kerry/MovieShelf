@@ -15,6 +15,7 @@ final class FakeApi: APIClientProtocol {
     
     func fetch<T: Decodable>(_ endpoint: TMDBEndpoints) async throws -> T {
         requestedEndpoints.append(endpoint)
+        guard !response.isEmpty else { throw URLError(.badServerResponse) }
         switch response.removeFirst() {
         case .success(let response):
             guard let typed = response as? T else { fatalError("Fake: unexpected type \(T.self)")}

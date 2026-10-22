@@ -17,7 +17,6 @@ extension MovieDTO {
         
         return MoviePreviewModel(
             id: id,
-            movieId: id,
             posterURL: posterURL,
             name: title,
             year: year,

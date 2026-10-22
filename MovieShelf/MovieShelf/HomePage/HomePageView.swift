@@ -89,7 +89,7 @@ struct HomePageView: View {
     private var mainPageView: some View {
         VStack {
             if let trendingMovie = viewModel.trendingMovie {
-                NavigationLink(value: trendingMovie.movieId) {
+                NavigationLink(value: trendingMovie.id) {
                     MainPageImageView(
                         imageURL: trendingMovie.posterURL,
                         title: trendingMovie.name,

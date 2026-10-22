@@ -33,7 +33,7 @@ struct HStackMoviesView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: Constraints.smallestSpacing) {
                     ForEach(movies) { movie in
-                        NavigationLink(value: movie.movieId) {
+                        NavigationLink(value: movie.id) {
                             MoviePreviewCell(model: movie)
                         }
                         .buttonStyle(.plain)

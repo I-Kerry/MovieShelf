@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MoviePreviewModel: Identifiable, Hashable {
     let id: Int
-    let movieId: Int
     let posterURL: URL?
     let name: String
     let year: Int
