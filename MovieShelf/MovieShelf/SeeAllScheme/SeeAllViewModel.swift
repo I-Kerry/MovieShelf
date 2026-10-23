@@ -47,6 +47,10 @@ final class SeeAllViewModel {
     private var page: Int = 1
     private var canLoadMore = false
     private(set) var isLoadingMore = false
+    var sorting: SortOption = .serverOrder
+    var sortedMovies: [MoviePreviewModel] {
+        sorting.apply(to: movies)
+    }
     
     init(service: APIClientProtocol, category: MovieCategory) {
         self.service = service

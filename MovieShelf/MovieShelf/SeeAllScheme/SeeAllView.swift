@@ -31,6 +31,19 @@ struct SeeAllView: View {
             .navigationDestination(for: Int.self) { movieId in
                 MovieDetailView(service: viewModel.service, movieId: movieId)
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Picker("Sorting", selection: $viewModel.sorting) {
+                            ForEach(SortOption.allCases, id: \.self) { option in
+                                Text(option.title).tag(option)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "line.3.horizontal.circle")
+                    }
+                }
+            }
     }
     
     @ViewBuilder
@@ -41,7 +54,7 @@ struct SeeAllView: View {
         case .loaded:
             ScrollView {
                 LazyVGrid(columns: columns, alignment: .center, spacing: Constraints.smallerSpacing) {
-                    ForEach(viewModel.movies, id: \.id) { movie in
+                    ForEach(viewModel.sortedMovies, id: \.id) { movie in
                         NavigationLink(value: movie.id) {
                             MoviePreviewCell(model: movie)
                         }
@@ -57,6 +70,7 @@ struct SeeAllView: View {
                     ProgressView()
                 }
             }
+            
         case .error:
             VStack(alignment: .center) {
                 Text("Can't be uploaded")
