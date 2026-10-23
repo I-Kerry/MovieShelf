@@ -21,11 +21,11 @@ final class MovieDetailViewModel {
         self.movieId = movieId
     }
     
-    func loadDetails(movieID: Int) async {
+    func loadDetails() async {
         state = .loading
         
         do {
-            let dto: MovieDetailsDTO = try await service.fetch(.movie(id: movieID))
+            let dto: MovieDetailsDTO = try await service.fetch(.movie(id: movieId))
             state = .loaded(dto.toDetailModel())
         } catch {
             state = .error("Can't be uploaded")
@@ -34,14 +34,21 @@ final class MovieDetailViewModel {
     
     func durationFormatter(_ mins: Int?) -> String? {
         guard let mins, mins > 0 else { return nil }
-        return "\(mins / 60)h \(mins % 60)m"
+        
+        if mins < 60 {
+            return "\(mins)m"
+        } else if mins % 60 != 0 {
+            return "\(mins / 60)h \(mins % 60)m"
+        } else {
+            return "\(mins / 60)h"
+        }
     }
     
     func loadSavedState() {
         isSaved = repository?.contains(movieId) ?? false
     }
     
-    func toggleWatchlist(movieId: Int) {
+    func toggleWatchlist() {
         if isSaved {
             repository?.remove([movieId])
         } else {

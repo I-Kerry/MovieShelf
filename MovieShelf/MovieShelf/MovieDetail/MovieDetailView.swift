@@ -27,7 +27,7 @@ struct MovieDetailView: View {
             case .error(let message):
                 VStack {
                     Text(message)
-                    Button("Retry") { Task { await viewModel.loadDetails(movieID: movieId)} }
+                    Button("Retry") { Task { await viewModel.loadDetails()} }
                 }
             }
         }
@@ -35,7 +35,7 @@ struct MovieDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    viewModel.toggleWatchlist(movieId: movieId)
+                    viewModel.toggleWatchlist()
                 } label: {
                     viewModel.isSaved ? Image(systemName: "plus.rectangle.fill.on.rectangle.fill") : Image(systemName: "plus.rectangle.on.rectangle")
                 }
@@ -43,7 +43,7 @@ struct MovieDetailView: View {
         }
         
         .task {
-            await viewModel.loadDetails(movieID: movieId)
+            await viewModel.loadDetails()
         }
         
         .task {

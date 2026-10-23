@@ -33,7 +33,6 @@ final class WatchlistRepository {
             addedAt: addedAt
         )
         context.insert(likedFilm)
-//        save()
     }
     
     func contains(_ movieId: Int) -> Bool {
@@ -42,9 +41,16 @@ final class WatchlistRepository {
     }
     
     func remove(_ movieIds: [Int]) -> Void {
-        try? context.delete(model: SDWatchListItem.self,
-                            where: #Predicate { movieIds.contains($0.id) })
-        save()
+        do {
+            let descriptor = FetchDescriptor<SDWatchListItem>(predicate: #Predicate { movieIds.contains($0.id)})
+            let items = try context.fetch(descriptor)
+            items.forEach {
+                context.delete($0)
+            }
+            save()
+        } catch {
+            print("remove failed:", error)
+        }
     }
     
     private func save() {

@@ -10,7 +10,7 @@ import Foundation
 
 final class FakeApi: APIClientProtocol {
     
-    var response: [Result<MoviesResponse, Error>] = []
+    var response: [Result<Any, Error>] = []
     private(set) var requestedEndpoints: [TMDBEndpoints] = []
     
     func fetch<T: Decodable>(_ endpoint: TMDBEndpoints) async throws -> T {

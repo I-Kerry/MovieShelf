@@ -79,7 +79,7 @@ struct HomePageViewModelTests {
         let api = FakeApi()
         let vm = HomePageViewModel(service: api)
         
-        api.response = (1...5).map { i -> Result<MoviesResponse, Error> in
+        api.response = (1...5).map { i -> Result<Any, Error> in
             i == 5 ? .failure(URLError(.timedOut)) : .success(MoviesResponse(page: 1, results: [makeDTO(id: i)], totalPages: 1, totalResults: 1))
         }
         // Act
