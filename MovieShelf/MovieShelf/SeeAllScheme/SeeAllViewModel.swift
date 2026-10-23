@@ -8,7 +8,7 @@
 import Foundation
 
 enum MovieCategory: Hashable {
-    case popular, nowPlaying, upcoming, topRated
+    case popular, nowPlaying, upcoming, topRated, genre(id: Int, name: String)
     
     var title: String {
         switch self {
@@ -20,6 +20,8 @@ enum MovieCategory: Hashable {
             "Coming Soon"
         case .topRated:
             "Top Rated"
+        case .genre(_, let name):
+            name
         }
     }
     
@@ -33,6 +35,8 @@ enum MovieCategory: Hashable {
                 .upcoming(page: page)
         case .topRated:
                 .topRated(page: page)
+        case .genre(let id, _):
+                .discover(genreId: id, page: page)
         }
     }
 }

@@ -17,7 +17,7 @@ enum TMDBEndpoints: Hashable, Equatable {
     case movieCredits(movieId: Int)
     case movieVideos(movieId: Int)
     case movieSimilar(movieId: Int)
-    case discover
+    case discover(genreId: Int, page: Int)
     case topRated(page: Int)
     
     var path: String {
@@ -47,7 +47,7 @@ extension TMDBEndpoints {
         case .movieCredits: []
         case .movieVideos: []
         case .movieSimilar: []
-        case .discover: []
+        case .discover(let genreId, let page): [URLQueryItem(name: "with_genres", value: String(genreId)), URLQueryItem(name: "page", value: String(page))]
         }
     }
     

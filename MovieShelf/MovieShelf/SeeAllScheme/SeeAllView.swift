@@ -60,7 +60,7 @@ struct SeeAllView: View {
                         }
                         .buttonStyle(.plain)
                         .onAppear {
-                            if movie.id == viewModel.movies.last?.id {
+                            if movie.id == viewModel.sortedMovies.last?.id {
                                 Task { await viewModel.loadNextPage() }
                             }
                         }

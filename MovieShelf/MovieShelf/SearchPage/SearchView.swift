@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     @State var viewModel: SearchViewModel
+    @State var selectedGenre: Genre?
     
     var body: some View {
         NavigationStack {
@@ -19,11 +20,17 @@ struct SearchView: View {
                     }
                     .foregroundStyle(Color.gray)
                     .padding()
-                
-                content
+                GenreView(selectedGenre: $selectedGenre, genres: GenreMock.allGenres)
+                    .onChange(of: selectedGenre) {
+                        viewModel.text = ""
+                    }
+                mainContent
             }
             .navigationDestination(for: Int.self) { movieID in
                 MovieDetailView(service: viewModel.service, movieId: movieID)
+            }
+            .onChange(of: viewModel.text) {
+                if !viewModel.text.isEmpty { selectedGenre = nil }
             }
         }
     }
@@ -52,6 +59,16 @@ struct SearchView: View {
             Spacer()
             Text(message)
             Spacer()
+        }
+    }
+    
+    @ViewBuilder
+    private var mainContent: some View {
+        if let genre = selectedGenre {
+            SeeAllView(service: viewModel.service, category: .genre(id: genre.id, name: genre.name))
+                .id(genre.id)
+        } else {
+            content
         }
     }
 }

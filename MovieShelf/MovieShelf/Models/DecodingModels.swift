@@ -28,7 +28,7 @@ struct BelongsToCollection: Codable {
     let backdropPath: String?
 }
 
-struct Genre: Codable {
+struct Genre: Codable, Equatable {
     let id: Int
     let name: String
 }
