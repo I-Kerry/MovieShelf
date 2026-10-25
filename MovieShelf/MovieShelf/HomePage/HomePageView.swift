@@ -91,7 +91,7 @@ struct HomePageView: View {
             if let trendingMovie = viewModel.trendingMovie {
                 NavigationLink(value: trendingMovie.id) {
                     MainPageImageView(
-                        imageURL: trendingMovie.posterURL,
+                        imageURL: trendingMovie.backDrop,
                         title: trendingMovie.name,
                         year: trendingMovie.year,
                         genre: trendingMovie.genre, rating: Float(trendingMovie.rating)

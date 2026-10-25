@@ -24,8 +24,8 @@ struct MoviePreviewCell: View {
                 .font(.title3)
                 .foregroundStyle(.textMade)
                 .lineLimit(Limits.lineLimit)
-                .multilineTextAlignment(.leading)
-                .frame(width: HStackMoviesSizes.cellWidth, height: HStackMoviesSizes.cellHeight)
+                .multilineTextAlignment(.center)
+                .frame(width: HStackMoviesSizes.cellWidth, height: HStackMoviesSizes.textHeight)
             
             HStack(spacing: Constraints.smallerSpacing) {
                 Text(String(model.year))
@@ -47,5 +47,5 @@ struct MoviePreviewCell: View {
 
 #Preview {
     MoviePreviewCell(model: MoviePreviewModel(
-        id: 1, posterURL: nil, name: "idk", year: 2009, rating: 1.9, genre: nil))
+        id: 1, posterURL: nil, name: "idk", year: 2009, rating: 1.9, genre: nil, backDrop: nil))
 }

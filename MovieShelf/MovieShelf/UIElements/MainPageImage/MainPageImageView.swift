@@ -18,6 +18,7 @@ struct MainPageImageView: View {
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             Color.textMade
+                .clipShape(RoundedRectangle(cornerRadius: Constraints.cornerRadius))
             AsyncImage(url: imageURL, content: { image in
                 image
                     .resizable()

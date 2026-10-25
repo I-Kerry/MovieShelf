@@ -14,4 +14,5 @@ struct MoviePreviewModel: Identifiable, Hashable {
     let year: Int
     let rating: Double
     let genre: String?
+    let backDrop: URL?
 }
