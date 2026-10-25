@@ -13,13 +13,13 @@ enum MovieCategory: Hashable {
     var title: String {
         switch self {
         case .popular:
-            "Popular Films"
+            Titles.popularMovies
         case .nowPlaying:
-            "Now Playing"
+            Titles.nowPlaying
         case .upcoming:
-            "Coming Soon"
+            Titles.upcoming
         case .topRated:
-            "Top Rated"
+            Titles.top
         case .genre(_, let name):
             name
         }
@@ -71,7 +71,7 @@ final class SeeAllViewModel {
             canLoadMore = response.page < response.totalPages
             state = .loaded(())
         } catch {
-            state = .error("Can't be uploaded")
+            state = .error(ErrorString.cantUpload)
         }
     }
     

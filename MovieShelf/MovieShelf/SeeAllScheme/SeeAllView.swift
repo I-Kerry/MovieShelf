@@ -34,13 +34,13 @@ struct SeeAllView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
-                        Picker("Sorting", selection: $viewModel.sorting) {
+                        Picker(Titles.sortingTitle, selection: $viewModel.sorting) {
                             ForEach(SortOption.allCases, id: \.self) { option in
                                 Text(option.title).tag(option)
                             }
                         }
                     } label: {
-                        Image(systemName: "line.3.horizontal.circle")
+                        Image(systemName: Icons.horizontalLines)
                     }
                 }
             }
@@ -73,8 +73,8 @@ struct SeeAllView: View {
             
         case .error:
             VStack(alignment: .center) {
-                Text("Can't be uploaded")
-                Button("Try again") {
+                Text(ErrorString.cantUpload)
+                Button(Titles.tryAgain) {
                     Task { await viewModel.retry() }
                 }
             }

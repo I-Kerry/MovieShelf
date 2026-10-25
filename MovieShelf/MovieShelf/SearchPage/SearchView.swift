@@ -14,7 +14,7 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TextField("Search movies...", text: $viewModel.text)
+                TextField(Titles.fieldPlaceholder, text: $viewModel.text)
                     .task(id: viewModel.text) {
                         await viewModel.search()
                     }

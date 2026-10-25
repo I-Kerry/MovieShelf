@@ -28,7 +28,7 @@ final class MovieDetailViewModel {
             let dto: MovieDetailsDTO = try await service.fetch(.movie(id: movieId))
             state = .loaded(dto.toDetailModel())
         } catch {
-            state = .error("Can't be uploaded")
+            state = .error(ErrorString.cantUpload)
         }
     }
     
@@ -48,9 +48,13 @@ final class MovieDetailViewModel {
         isSaved = repository?.contains(movieId) ?? false
     }
     
-    func toggleWatchlist() {
+    func toggleWatchlist() throws {
         if isSaved {
-            repository?.remove([movieId])
+            do {
+                try repository?.remove([movieId])
+            } catch {
+                throw SDError.removalError(error)
+            }
         } else {
             guard case .loaded(let details) = state else { return }
             repository?.add(id: movieId, title: details.title, posterURL: details.posterURL?.absoluteString, voteAverage: details.rating, releaseDate: details.releaseDate)

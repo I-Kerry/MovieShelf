@@ -22,7 +22,6 @@ struct MovieShelfApp: App {
             ContentView(service: TMDBService())
         }
         .modelContainer(container)
-//        .modelContainer(for: SDWatchListItem.self)
         .environment(\.watchlistRepository, repository)
     }
 }

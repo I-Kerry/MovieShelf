@@ -5,7 +5,7 @@
 //  Created by Kirill Maidanovich on 17.10.2026.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 @MainActor
@@ -40,24 +40,24 @@ final class WatchlistRepository {
         return (( try? context.fetchCount(descriptor)) ?? 0) > 0
     }
     
-    func remove(_ movieIds: [Int]) -> Void {
+    func remove(_ movieIds: [Int]) throws -> Void {
         do {
             let descriptor = FetchDescriptor<SDWatchListItem>(predicate: #Predicate { movieIds.contains($0.id)})
             let items = try context.fetch(descriptor)
             items.forEach {
                 context.delete($0)
             }
-            save()
+            try save()
         } catch {
-            print("remove failed:", error)
+            throw SDError.removalError(error)
         }
     }
     
-    private func save() {
+    private func save() throws {
         do {
             try context.save()
         } catch {
-            print("Can't be saved")
+            throw SDError.savingError(error)
         }
     }
 }

@@ -9,16 +9,6 @@ import SwiftUI
 
 struct MainPageImageView: View {
     
-    private enum Constants {
-        static let height: CGFloat = 210
-        static let cornerRadius: CGFloat = 16
-        static let opacity = 0.7
-        static let spacing: CGFloat = 6
-        static let padding: CGFloat = 16
-        static let dividerHeight: CGFloat = 16
-        static let dividerWidth: CGFloat = 8
-    }
-    
     let imageURL: URL?
     let title: String
     let year: Int
@@ -32,27 +22,27 @@ struct MainPageImageView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: Constants.height)
+                    .frame(height: MainPageImageViewSize.height)
                     .frame(maxWidth: .infinity)
                     .clipped()
-                    .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+                    .clipShape(RoundedRectangle(cornerRadius: Constraints.cornerRadius))
             }, placeholder: {
                 ProgressView()
             })
                 
             LinearGradient(
-                colors: [.clear, .black.opacity(Constants.opacity)],
+                colors: [.clear, .black.opacity(Opacity.highOpacity)],
                 startPoint: .center,
                 endPoint: .bottom)
-            .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+            .clipShape(RoundedRectangle(cornerRadius: Constraints.cornerRadius))
 
-            VStack(alignment: .leading, spacing: Constants.spacing) {
+            VStack(alignment: .leading, spacing: Constraints.smallerSpacing) {
                 Spacer()
                 Text(title)
                     .font(.title)
                     .foregroundStyle(.white)
                 
-                HStack(spacing: Constants.spacing) {
+                HStack(spacing: Constraints.smallerSpacing) {
                     Text(String(year))
                         .font(.caption2)
                         .foregroundStyle(.gray)
@@ -65,15 +55,15 @@ struct MainPageImageView: View {
                 }
             }
             .padding(.horizontal)
-            .padding(.bottom, Constants.padding)
+            .padding(.bottom, Constraints.spacing)
         }
-        .frame(height: Constants.height)
+        .frame(height: MainPageImageViewSize.height)
         .frame(maxWidth: .infinity)
     }
     
     var divider: some View {
         Circle()
-            .frame(width: Constants.dividerWidth, height: Constants.dividerHeight)
+            .frame(width: DividerItemsFrame.mainPageDividerWidth, height: DividerItemsFrame.mainPageDividerHeight)
             .foregroundStyle(.gray)
     }
 }

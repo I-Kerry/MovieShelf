@@ -16,13 +16,13 @@ enum SortOption: CaseIterable {
     var title: String {
         switch self {
         case .serverOrder:
-            "Default"
+            SortOptionTitles.defaultTitle
         case .rating:
-            "Rating"
+            SortOptionTitles.rating
         case .releaseDate:
-            "Date"
+            SortOptionTitles.date
         case .title:
-            "Name"
+            SortOptionTitles.name
         }
     }
     func apply(to movies: [MoviePreviewModel]) -> [MoviePreviewModel] {
@@ -52,15 +52,15 @@ enum WatchlistSort: CaseIterable {
     var title: String {
         switch self {
         case .recentlyAdded:
-            "Newest"
+            SortOptionTitles.newest
         case .oldestAdded:
-            "Oldest"
+            SortOptionTitles.oldest
         case .rating:
-            "Rating"
+            SortOptionTitles.rating
         case .releaseDate:
-            "Date"
+            SortOptionTitles.date
         case .title:
-            "Title"
+            SortOptionTitles.name
         }
     }
     

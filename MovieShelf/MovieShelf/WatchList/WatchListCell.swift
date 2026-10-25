@@ -21,7 +21,7 @@ struct WatchListCell: View {
     @ViewBuilder
     private var poster: some View {
         ZStack {
-            Color.gray.opacity(0.5)
+            Color.gray.opacity(Opacity.highOpacity)
                 .aspectRatio(contentMode: .fill)
             if let url = item.posterURL.flatMap(URL.init(string:)) {
                 AsyncImage(url: url) { phase in
@@ -30,27 +30,27 @@ struct WatchListCell: View {
                     case .success(let image):
                         image.resizable()
                             .scaledToFill()
-                    case .failure: Image(systemName: "photo")
+                    case .failure: Image(systemName: Icons.photo)
 
                     @unknown default: EmptyView()
                     }
                 }
                 .id(reloadToken)
             } else {
-                Image(systemName: "photo")
+                Image(systemName: Icons.photo)
             }
         }
-        .frame(width: 170, height: 250)
+        .frame(width: WatchListImageFrame.width, height: WatchListImageFrame.height)
         .clipShape(RoundedRectangle(cornerRadius: Constraints.cornerRadius))
     }
     
     private var info: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: Constraints.smallestSpacing) {
             Text(item.title)
                 .font(.body)
-                .lineLimit(2, reservesSpace: true)
+                .lineLimit(Limits.lineLimit, reservesSpace: true)
             
-            HStack(spacing: 4) {
+            HStack(spacing: Constraints.smallestSpacing) {
                 if let rating = item.voteAverage {
                     Text("★ \(String(format: "%.1f", rating))")
                         .font(.caption)
@@ -60,11 +60,11 @@ struct WatchListCell: View {
                 if item.voteAverage != nil,
                    item.releaseDate != nil {
                     Circle()
-                        .frame(width: 5, height: 5)
+                        .frame(width: DividerItemsFrame.frameSize, height: DividerItemsFrame.frameSize)
                 }
                 
                 if let releaseDate = item.releaseDate {
-                    Text(String(releaseDate).prefix(4))
+                    Text(String(releaseDate).prefix(Limits.datePrefix))
                         .font(.caption)
                 }
             }

@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-private enum Constants {
-    static let stackFrame: CGFloat = 250
-}
-
 struct HStackMoviesView: View {
     let title: String
     let movies: [MoviePreviewModel]
@@ -43,6 +39,6 @@ struct HStackMoviesView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: Constants.stackFrame)
+        .frame(height: HStackMoviesSizes.stackFrame)
     }
 }

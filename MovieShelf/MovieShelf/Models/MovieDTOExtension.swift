@@ -12,7 +12,7 @@ extension MovieDTO {
         let posterURL: URL? = posterPath.flatMap {
             URL(string: "\(TMDBImage.baseURL)\($0)")
         }
-        let year: Int = Int(String(releaseDate.prefix(4))) ?? 0
+        let year: Int = Int(String(releaseDate.prefix(Limits.datePrefix))) ?? 0
         let formattedRating = ((voteAverage) * 100).rounded() / 100
         
         return MoviePreviewModel(
@@ -35,7 +35,7 @@ extension MovieDetailsDTO {
         let backdropURL: URL? = backdropPath.flatMap {
             URL(string: "\(TMDBImage.baseURL)\($0)")
         }
-        let year: Int? = Int(String(releaseDate.prefix(4)))
+        let year: Int? = Int(String(releaseDate.prefix(Limits.datePrefix)))
         let formattedRating = ((voteAverage * 100).rounded() / 100 )
         let genres = genres.map(\.name)
         
@@ -58,7 +58,7 @@ extension MovieDTO {
         let posterURL: URL? = posterPath.flatMap {
             URL(string: "\(TMDBImage.baseURL)\($0)")
         }
-        let year: Int? = Int(String(releaseDate.prefix(4)))
+        let year: Int? = Int(String(releaseDate.prefix(Limits.datePrefix)))
         let formattedRating = ((voteAverage * 100).rounded() / 100 )
         let genre = genreIds.first.flatMap { genres[$0] }
         

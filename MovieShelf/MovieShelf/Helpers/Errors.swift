@@ -21,3 +21,13 @@ enum ApiErrors: Error {
 enum SearchError: Error {
     case emptyQuery
 }
+
+enum ErrorString {
+    static let noRating = "Not rated yet"
+    static let cantUpload = "Can't be uploaded"
+}
+
+enum SDError: Error {
+    case removalError(Error)
+    case savingError(Error)
+}

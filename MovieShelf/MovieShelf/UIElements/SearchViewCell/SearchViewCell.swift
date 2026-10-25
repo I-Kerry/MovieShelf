@@ -18,11 +18,11 @@ struct SearchViewCell: View {
                     image.resizable()
                         .clipShape(RoundedRectangle(cornerRadius: Constraints.cornerRadius))
                 default:
-                    Color.gray.opacity(0.3)
+                    Color.gray.opacity(Opacity.lowOpacity)
                         .clipShape(RoundedRectangle(cornerRadius: Constraints.cornerRadius))
                 }
             }
-            .frame(width: 70, height: 105)
+            .frame(width: SearchViewCellSize.width, height: SearchViewCellSize.height)
             
             VStack(alignment: .leading, spacing: Constraints.spacing) {
                 Text(searchModel.title)
@@ -32,7 +32,7 @@ struct SearchViewCell: View {
                         if let year = searchModel.releaseYear {
                             Text(String(year))
                         }
-                        Text("·")
+                        Text(DividerItemsFrame.dot)
                         Text(searchModel.genre ?? "")
                     }
                     .font(.callout)
@@ -43,14 +43,14 @@ struct SearchViewCell: View {
                         .font(.title3)
                         .foregroundStyle(.yellow)
                 } else {
-                    Text("Not rated yet")
+                    Text(ErrorString.noRating)
                 }
             }
             .padding()
             
             Spacer()
         }
-        .frame(height: 104)
+        .frame(height: SearchViewCellSize.height)
         .frame(maxWidth: .infinity)
         .padding()
         .background(Color.backgroundMade)

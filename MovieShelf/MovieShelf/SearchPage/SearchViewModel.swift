@@ -30,7 +30,7 @@ final class SearchViewModel {
             
             state = .loaded(response.results.map { $0.toSearchModel(genres: genres) })
         } catch {
-            state = .error("Can't be uploaded")
+            state = .error(ErrorString.cantUpload)
         }
     }
 }

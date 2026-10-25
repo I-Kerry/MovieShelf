@@ -27,7 +27,7 @@ struct MovieDetailView: View {
             case .error(let message):
                 VStack {
                     Text(message)
-                    Button("Retry") { Task { await viewModel.loadDetails()} }
+                    Button(Titles.tryAgain) { Task { await viewModel.loadDetails()} }
                 }
             }
         }
@@ -35,9 +35,9 @@ struct MovieDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    viewModel.toggleWatchlist()
+                    try? viewModel.toggleWatchlist()
                 } label: {
-                    viewModel.isSaved ? Image(systemName: "plus.rectangle.fill.on.rectangle.fill") : Image(systemName: "plus.rectangle.on.rectangle")
+                    viewModel.isSaved ? Image(systemName: Icons.rectangleFill) : Image(systemName: Icons.rectangle)
                 }
             }
         }
@@ -57,16 +57,16 @@ struct MovieDetailView: View {
         ScrollView {
             AsyncImage(url: movie.backdropURL) {
                 $0.resizable().scaledToFill()
-            } placeholder: { Color.gray.opacity(0.2)}
-                .frame(height: 200).clipped()
+            } placeholder: { Color.gray.opacity(Opacity.lowOpacity)}
+                .frame(height: DetailViewSizes.height).clipped()
                 .overlay(alignment: .bottomLeading) {
                     AsyncImage(url: movie.posterURL) {
                         $0.resizable().scaledToFill()
-                    } placeholder: { Color.gray.opacity(0.2) }
-                        .frame(width: 80 ,height: 120).clipped()
+                    } placeholder: { Color.gray.opacity(Opacity.lowOpacity) }
+                        .frame(width: DetailViewSizes.placeholderWidth ,height: DetailViewSizes.placeholderHeight).clipped()
                         .overlay {
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.white, lineWidth: 3)
+                            RoundedRectangle(cornerRadius: Constraints.cornerRadius)
+                                .stroke(Color.white, lineWidth: DetailViewSizes.contentLineBorderSize)
                         }
                         .padding()
                 }
@@ -86,9 +86,9 @@ struct MovieDetailView: View {
                         ForEach(movie.genres, id: \.self) { genre in
                             Text(genre)
                                 .font(.subheadline)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(Capsule().fill(Color.blue.opacity(0.2)))
+                                .padding(.horizontal, Constraints.usualSpacing)
+                                .padding(.vertical, Constraints.smallerSpacing)
+                                .background(Capsule().fill(Color.blue.opacity(Opacity.lowOpacity)))
                                 .foregroundStyle(.blue)
                         }
                     }

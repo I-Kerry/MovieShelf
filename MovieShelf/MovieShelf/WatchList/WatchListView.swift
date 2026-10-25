@@ -48,8 +48,8 @@ struct WatchListView: View {
                         .buttonStyle(.plain)
                         .overlay(alignment: .topTrailing) {
                             if isSelecting {
-                                Image(systemName: selectedIds.contains(film.id) ? "checkmark.circle.fill" : "circle")
-                                    .padding(8)
+                                Image(systemName: selectedIds.contains(film.id) ? Icons.checkmarkFill : Icons.circle)
+                                    .padding(Constraints.smallerSpacing)
                             }
                         }
                     }
@@ -62,13 +62,13 @@ struct WatchListView: View {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     if !isSelecting {
                         Menu {
-                            Picker("Sorting", selection: $sorting) {
+                            Picker(Titles.sortingTitle, selection: $sorting) {
                                 ForEach(WatchlistSort.allCases, id: \.self) { option in
                                     Text(option.title).tag(option)
                                 }
                             }
                         } label: {
-                            Image(systemName: "line.3.horizontal.circle")
+                            Image(systemName: Icons.horizontalLines)
                         }
                     }
                     
@@ -76,12 +76,12 @@ struct WatchListView: View {
                         isSelecting.toggle()
                         selectedIds.removeAll()
                     } label: {
-                        Image(systemName: isSelecting ?  "xmark.circle" : "arrow.up.trash")
+                        Image(systemName: isSelecting ?  Icons.xMarkCircle : Icons.arrowTrash)
                     }
                 }
                 if isSelecting {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button("Delete (\(selectedIds.count))", role: .destructive) {
+                        Button("\(Titles.delete) (\(selectedIds.count))", role: .destructive) {
                             showDeleteConfirmation = true
                         }
                         .disabled(selectedIds.isEmpty)
@@ -91,13 +91,13 @@ struct WatchListView: View {
             
         }
         
-        .confirmationDialog("Delete \(selectedIds.count) movie(s)?", isPresented: $showDeleteConfirmation, titleVisibility: .visible) {
-            Button("Delete", role: .destructive) {
+        .confirmationDialog("\(Titles.delete) \(selectedIds.count) movie(s)?", isPresented: $showDeleteConfirmation, titleVisibility: .visible) {
+            Button(Titles.delete, role: .destructive) {
                 repository?.remove(Array(selectedIds))
                 selectedIds.removeAll()
                 isSelecting = false
             }
-            Button("Cancel") {
+            Button(Titles.cancel) {
                 showDeleteConfirmation = false
             }
         }

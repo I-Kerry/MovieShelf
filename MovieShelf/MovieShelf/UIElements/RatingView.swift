@@ -9,18 +9,12 @@ import SwiftUI
 
 
 struct RatingView: View {
-    
-    private enum Constants {
-        static let size: CGFloat = 10
-        static let spacing: CGFloat = 4
-        static let iconName = "star.fill"
-    }
-    
+
     let rating: Float
     var body: some View {
-        HStack(spacing: Constants.spacing) {
-            Image(systemName: Constants.iconName)
-                .font(.system(size: Constants.size))
+        HStack(spacing: Constraints.smallestSpacing) {
+            Image(systemName: Icons.star)
+                .font(.system(size: DividerItemsFrame.ratingSize))
                 .foregroundStyle(.yellow)
             Text(String(rating))
                 .font(.caption)

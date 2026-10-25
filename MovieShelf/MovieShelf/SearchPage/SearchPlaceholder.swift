@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchPlaceholder: View {
     var body: some View {
         Spacer()
-        Text("Search for the film you'd like to know about")
+        Text(Titles.searchPlaceholder)
             .font(.title2)
             .fontDesign(.rounded)
             .multilineTextAlignment(.center)

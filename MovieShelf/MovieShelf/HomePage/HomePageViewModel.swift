@@ -33,7 +33,7 @@ final class HomePageViewModel {
             let response: MoviesResponse = try await service.fetch(endpoint)
             return .loaded(response.results.map { $0.toPreviewModel() })
         } catch {
-            return .error("Can't be uploaded")
+            return .error(ErrorString.cantUpload)
         }
     }
     

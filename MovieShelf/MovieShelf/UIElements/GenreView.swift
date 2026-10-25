@@ -24,9 +24,9 @@ struct GenreView: View {
                     } label: {
                         Text(genre.name)
                             .font(.subheadline)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(Capsule().fill(selectedGenre == genre ? Color.blue : Color.blue.opacity(0.2)))
+                            .padding(.horizontal, Constraints.usualSpacing)
+                            .padding(.vertical, Constraints.smallerSpacing)
+                            .background(Capsule().fill(selectedGenre == genre ? Color.blue : Color.blue.opacity(Opacity.lowOpacity)))
                             .foregroundStyle(selectedGenre == genre ? .white : .blue)
                     }
                     .buttonStyle(.plain)
