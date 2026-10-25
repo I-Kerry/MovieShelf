@@ -1,5 +1,5 @@
 //
-//  Reposiroty.swift
+//  Repository.swift
 //  MovieShelf
 //
 //  Created by Kirill Maidanovich on 17.10.2026.

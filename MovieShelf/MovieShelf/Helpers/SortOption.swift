@@ -45,3 +45,37 @@ enum SortOption: CaseIterable {
         }
     }
 }
+
+enum WatchlistSort: CaseIterable {
+    case recentlyAdded, oldestAdded, rating, releaseDate, title
+    
+    var title: String {
+        switch self {
+        case .recentlyAdded:
+            "Newest"
+        case .oldestAdded:
+            "Oldest"
+        case .rating:
+            "Rating"
+        case .releaseDate:
+            "Date"
+        case .title:
+            "Title"
+        }
+    }
+    
+    func apply(to movies: [SDWatchListItem]) -> [SDWatchListItem] {
+        switch self {
+        case .recentlyAdded:
+            movies.sorted { $0.addedAt > $1.addedAt }
+        case .oldestAdded:
+            movies.sorted { $0.addedAt < $1.addedAt }
+        case .rating:
+            movies.sorted { $0.voteAverage ?? 0 > $1.voteAverage ?? 0 }
+        case .releaseDate:
+            movies.sorted { $0.releaseDate ?? 0 > $1.releaseDate ?? 0 }
+        case .title:
+            movies.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
+        }
+    }
+}

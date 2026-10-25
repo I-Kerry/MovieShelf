@@ -9,8 +9,16 @@ import SwiftUI
 import SwiftData
 
 struct WatchListView: View {
+    @Environment(\.watchlistRepository) private var repository
     @Query(sort: \SDWatchListItem.addedAt, order: .reverse) private var likedFilms: [SDWatchListItem]
+    @State private var isSelecting = false
+    @State private var selectedIds: Set<Int> = []
+    @State private var showDeleteConfirmation = false
+    @State private var sorting: WatchlistSort = .recentlyAdded
     private let service: APIClientProtocol
+    private var sortedMovies: [SDWatchListItem] {
+        sorting.apply(to: likedFilms)
+    }
     
     init(service: APIClientProtocol) {
         self.service = service
@@ -25,17 +33,77 @@ struct WatchListView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns, alignment: .center, spacing: Constraints.spacing) {
-                    ForEach(likedFilms, id: \.id) { film in
-                        NavigationLink(value: film.id) {
-                            WatchListCell(item: film)
+                    ForEach(sortedMovies, id: \.id) { film in
+                        Group {
+                            if isSelecting {
+                                Button {
+                                    toggleSelection(film.id)
+                                } label: {
+                                    WatchListCell(item: film)
+                                }
+                            } else {
+                                NavigationLink(value: film.id) { WatchListCell(item: film) }
+                            }
                         }
                         .buttonStyle(.plain)
+                        .overlay(alignment: .topTrailing) {
+                            if isSelecting {
+                                Image(systemName: selectedIds.contains(film.id) ? "checkmark.circle.fill" : "circle")
+                                    .padding(8)
+                            }
+                        }
                     }
                 }
             }
             .navigationDestination(for: Int.self) { movieId in
                 MovieDetailView(service: service, movieId: movieId)
             }
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    if !isSelecting {
+                        Menu {
+                            Picker("Sorting", selection: $sorting) {
+                                ForEach(WatchlistSort.allCases, id: \.self) { option in
+                                    Text(option.title).tag(option)
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "line.3.horizontal.circle")
+                        }
+                    }
+                    
+                    Button {
+                        isSelecting.toggle()
+                        selectedIds.removeAll()
+                    } label: {
+                        Image(systemName: isSelecting ?  "xmark.circle" : "arrow.up.trash")
+                    }
+                }
+                if isSelecting {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("Delete (\(selectedIds.count))", role: .destructive) {
+                            showDeleteConfirmation = true
+                        }
+                        .disabled(selectedIds.isEmpty)
+                    }
+                }
+            }
+            
         }
+        
+        .confirmationDialog("Delete \(selectedIds.count) movie(s)?", isPresented: $showDeleteConfirmation, titleVisibility: .visible) {
+            Button("Delete", role: .destructive) {
+                repository?.remove(Array(selectedIds))
+                selectedIds.removeAll()
+                isSelecting = false
+            }
+            Button("Cancel") {
+                showDeleteConfirmation = false
+            }
+        }
+    }
+    
+    private func toggleSelection(_ id: Int) {
+        if selectedIds.contains(id) { selectedIds.remove(id) } else { selectedIds.insert(id) }
     }
 }
