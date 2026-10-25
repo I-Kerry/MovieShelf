@@ -93,7 +93,7 @@ struct WatchListView: View {
         
         .confirmationDialog("\(Titles.delete) \(selectedIds.count) movie(s)?", isPresented: $showDeleteConfirmation, titleVisibility: .visible) {
             Button(Titles.delete, role: .destructive) {
-                repository?.remove(Array(selectedIds))
+                try? repository?.remove(Array(selectedIds))
                 selectedIds.removeAll()
                 isSelecting = false
             }

@@ -4,7 +4,15 @@ xcuserdata/
 DerivedData/
 .DS_Store
 build/
+.xcscmblueprint
 
 # Swift Package Manager
 .build/
 .swiftpm/
+*.xcarchive
+*.ipa
+*.dSYM.zip
+*.dSYM
+Secrets.xcconfig
+.idea/
+*.swp

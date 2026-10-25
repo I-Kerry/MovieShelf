@@ -19,7 +19,7 @@ final class TMDBService: APIClientProtocol {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = [
           "accept": "application/json",
-          "Authorization": "Bearer \(ApiKey.accessToken)"
+          "Authorization": "Bearer \(Secrets.accessToken)"
         ]
         
         return request

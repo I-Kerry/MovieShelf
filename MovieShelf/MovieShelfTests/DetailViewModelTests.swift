@@ -58,11 +58,11 @@ struct DetailViewModelTests {
         vm.loadSavedState()
         #expect(vm.isSaved == false)
         
-        vm.toggleWatchlist()
+        try? vm.toggleWatchlist()
         #expect(vm.isSaved == true)
         #expect(repository.contains(10))
         
-        vm.toggleWatchlist()
+        try? vm.toggleWatchlist()
         #expect(vm.isSaved == false)
         #expect(!repository.contains(10))
     }

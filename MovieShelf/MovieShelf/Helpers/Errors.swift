@@ -25,6 +25,7 @@ enum SearchError: Error {
 enum ErrorString {
     static let noRating = "Not rated yet"
     static let cantUpload = "Can't be uploaded"
+    static let tokenError = "TMDB_TOKEN is missing. Copy Secrets.example.xcconfig to Secrets.xcconfig and add your token."
 }
 
 enum SDError: Error {
