@@ -38,12 +38,13 @@ struct SearchViewCell: View {
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 }
-                if let rating = searchModel.rating {
+                if let rating = searchModel.rating, rating > 0 {
                     Text(String(format: "%.1f", rating))
                         .font(.title3)
                         .foregroundStyle(.yellow)
                 } else {
                     Text(ErrorString.noRating)
+                        .foregroundStyle(.secondary)
                 }
             }
             .padding()

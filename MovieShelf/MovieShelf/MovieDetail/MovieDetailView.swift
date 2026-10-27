@@ -75,7 +75,12 @@ struct MovieDetailView: View {
                 
                 Text(movie.title)
                     .font(.title.bold())
-                Text("★ \(String(format: "%.1f", movie.rating))")
+                if movie.rating > 0 {
+                    Text("★ \(String(format: "%.1f", movie.rating))")
+                } else {
+                    Text(ErrorString.noRating)
+                        .foregroundStyle(.secondary)
+                }
                 
                 if let year = movie.releaseDate {
                     Text(String(year))

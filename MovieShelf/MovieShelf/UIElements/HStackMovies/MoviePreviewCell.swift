@@ -35,9 +35,9 @@ struct MoviePreviewCell: View {
                 Spacer()
                     .frame(width: .leastNonzeroMagnitude)
                 
-                Text(String(model.rating))
+                Text(model.rating > 0 ? String(format: "%.1f", model.rating) : "N/A")
                     .font(.caption2)
-                    .foregroundStyle(.yellow)
+                    .foregroundStyle(model.rating > 0 ? .yellow : .gray)
             }
             .frame(width: HStackMoviesSizes.cellWidth)
         }

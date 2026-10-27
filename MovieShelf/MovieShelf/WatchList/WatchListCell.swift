@@ -51,10 +51,14 @@ struct WatchListCell: View {
                 .lineLimit(Limits.lineLimit, reservesSpace: true)
             
             HStack(spacing: Constraints.smallestSpacing) {
-                if let rating = item.voteAverage {
+                if let rating = item.voteAverage, rating > 0 {
                     Text("★ \(String(format: "%.1f", rating))")
                         .font(.caption)
                         .foregroundStyle(.yellow)
+                } else {
+                    Text("N/A")
+                        .font(.caption)
+                        .foregroundStyle(.gray)
                 }
                 
                 if item.voteAverage != nil,
